@@ -1,71 +1,39 @@
-import { useCallback, useEffect, useState } from 'react'
-import Button from '../components/Button'
-import ClickCount from '../components/ClickCount'
-import styles from '../styles/home.module.css'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function throwError() {
-  console.log(
-    // The function body() is not defined
-    document.body()
-  )
-}
-
-function Home() {
-  const [count, setCount] = useState(0)
-  const increment = useCallback(() => {
-    setCount((v) => v + 1)
-  }, [setCount])
+const Home = () => {
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const r = setInterval(() => {
-      increment()
-    }, 1000)
-
-    return () => {
-      clearInterval(r)
-    }
-  }, [increment])
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+          headers: {
+            Authorization: `Bearer ${process.env.TMDB_API_KEY}`,  
+          },
+          params: {
+            language: 'en-US',
+            page: 1,
+          },
+        });
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+    fetchMovies();
+  }, []);
 
   return (
-    <main className={styles.main}>
-      <h1>Fast Refresh Demo</h1>
-      <p>
-        Fast Refresh is a Next.js feature that gives you instantaneous feedback
-        on edits made to your React components, without ever losing component
-        state.
-      </p>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          Auto incrementing value. The counter won't reset after edits or if
-          there are errors.
-        </p>
-        <p>Current value: {count}</p>
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>Component with state.</p>
-        <ClickCount />
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          The button below will throw 2 errors. You'll see the error overlay to
-          let you know about the errors but it won't break the page or reset
-          your state.
-        </p>
-        <Button
-          onClick={(e) => {
-            setTimeout(() => document.parentNode(), 0)
-            throwError()
-          }}
-        >
-          Throw an Error
-        </Button>
-      </div>
-      <hr className={styles.hr} />
-    </main>
-  )
-}
+    <div>
+      <h1>Popular Movies</h1>
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>{movie.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

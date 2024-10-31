@@ -1,13 +1,30 @@
-# GitHub Codespaces ♥️ Next.js
+## Next.js Movie Search Challenge
 
-Welcome to your shiny new Codespace running Next.js! We've got everything fired up and running for you to explore Next.js.
+This project is a Next.js application that fetches and displays a list of popular movies using The Movie Database (TMDb) API. The goal is to create a search bar with fuzzy matching and optimization features to enhance the user experience.
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
+# Current Implementation
+The app currently:
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+- Fetches a list of popular movies from the TMDb API and displays their titles on the homepage.
+- Has a basic page structure set up with a list of movie titles in the <ul> element.
+- The initial setup in pages/index.js does the following:
+    - Connects to the TMDb API and retrieves popular movies on page load.
+    - Renders the fetched movies in a simple list.
 
-To run this application:
+# Your Tasks
+Please complete the following tasks to enhance the application:
 
-```
-npm run dev
-```
+1. Search Bar with Fuzzy Matching
+    - Add a search bar at the top of the page to allow users to search for movies.
+    - Implement fuzzy matching in the search so that users can find partial matches. For example, searching "Spid" should match "Spider-Man".
+2. Debouncing
+    - Implement debouncing on the search input to avoid frequent re-renders or excessive filtering as the user types. Aim for a delay of around 500ms.
+3. Optional Enhancements
+    - Add basic styling to the search bar and movie list to make the page more visually appealing.
+    - If desired, organize your code with reusable components (e.g., SearchBar, MovieList).
+
+# Running the Project
+To start the development server:
+
+´npm run dev´
+
