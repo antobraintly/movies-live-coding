@@ -3,6 +3,7 @@
 This project is a Next.js application that fetches and displays a list of popular movies using The Movie Database (TMDb) API. The goal is to create a search bar with fuzzy matching and optimization features to enhance the user experience.
 
 ## Current Implementation 👷
+
 The app currently:
 
 - Fetches a list of popular movies from the TMDb API and displays their titles on the homepage.
@@ -28,4 +29,3 @@ To start the development server:
 ```
 npm run dev
 ```
-
